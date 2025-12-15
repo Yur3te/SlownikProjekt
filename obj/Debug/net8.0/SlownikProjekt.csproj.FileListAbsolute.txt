@@ -1,0 +1,14 @@
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/SlownikProjekt.GeneratedMSBuildEditorConfig.editorconfig
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/SlownikProjekt.AssemblyInfoInputs.cache
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/SlownikProjekt.AssemblyInfo.cs
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/SlownikProjekt.csproj.CoreCompileInputs.cache
+/home/yur3te/Studiren/Kordos/SlownikProjekt/bin/Debug/net8.0/SlownikProjekt
+/home/yur3te/Studiren/Kordos/SlownikProjekt/bin/Debug/net8.0/SlownikProjekt.deps.json
+/home/yur3te/Studiren/Kordos/SlownikProjekt/bin/Debug/net8.0/SlownikProjekt.runtimeconfig.json
+/home/yur3te/Studiren/Kordos/SlownikProjekt/bin/Debug/net8.0/SlownikProjekt.dll
+/home/yur3te/Studiren/Kordos/SlownikProjekt/bin/Debug/net8.0/SlownikProjekt.pdb
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/SlownikProjekt.dll
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/refint/SlownikProjekt.dll
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/SlownikProjekt.pdb
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/SlownikProjekt.genruntimeconfig.cache
+/home/yur3te/Studiren/Kordos/SlownikProjekt/obj/Debug/net8.0/ref/SlownikProjekt.dll
