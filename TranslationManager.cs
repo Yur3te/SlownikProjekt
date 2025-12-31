@@ -13,15 +13,15 @@ namespace SlownikProjekt
             _translator = translator;
         }
 
-        public void TranslateForClient(Client client, string inputPath, string outputPath)
+        public void TranslateForClient(Client client, string inputFileName, string outputFileName)
         {
             try
             {
-                string text = File.ReadAllText(inputPath);
+                string text = FileService.LoadText(inputFileName);
                 string translated = _translator.TranslateText(text);
 
-                File.WriteAllText(outputPath, translated);
-
+                FileService.SaveText(outputFileName, translated);
+                
                 _history.Add(new TranslationRecord(client, text, translated));
                 
             }

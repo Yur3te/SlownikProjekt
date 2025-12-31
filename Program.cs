@@ -41,22 +41,44 @@ namespace SlownikProjekt
                         string clientName = Console.ReadLine();
                         Client client = new Client(clientName);
 
-                        Console.Write("Podaj ścieżkę pliku do tłumaczenia: ");
-                        string inputPath = Console.ReadLine();
-                        
-                        if (!System.IO.File.Exists(inputPath))
+                        var files = FileService.GetPossibleFiles();
+
+                        if (files.Count == 0)
                         {
-                            Console.WriteLine("Plik nie istnieje!");
+                            Console.WriteLine("Brak plików do tłumaczenia w folderze FilesToTranslate.");
+                            break;
+                        }
+
+                        Console.WriteLine("Wybierz plik do tłumaczenia:");
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {files[i]}");
+                        }
+
+                        string fileNumber = Console.ReadLine();
+
+                        bool isNumber = int.TryParse(fileNumber, out int choice);
+                        bool isInRange = choice >= 1 && choice <= files.Count;
+
+                        if (!isNumber || !isInRange)
+                        {
+                            Console.WriteLine("Nieprawidłowy wybór.");
                             return;
                         }
 
-                        Console.Write("Podaj ścieżkę docelowego pliku: ");
-                        string outputPath = Console.ReadLine();
 
-                        manager.TranslateForClient(client, inputPath, outputPath);
+                        string inputFileName = files[choice - 1];
+                        string inputPath = Path.Combine(FileService.FilesToTranslateDir, inputFileName);
+
+
+                        Console.Write("Podaj nazwę pliku do zapisu tłumaczenia: ");
+                        string outputFileName = Console.ReadLine();
+
+                        manager.TranslateForClient(client, inputFileName, outputFileName);
                         break;
                     
                     case "2":
+                    // to do translation manager co zwraca text
                         List<TranslationRecord> history = manager.GetHistory();
                         if (history.Count == 0)
                         {
