@@ -11,24 +11,26 @@ namespace SlownikProjekt
         public TranslationManager(Translator translator)
         {
             _translator = translator;
+            _translator.TranslationError += OnTranslationError;
         }
+
+        private void OnTranslationError(object? sender, TranslationException e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
 
         public void TranslateForClient(Client client, string inputFileName, string outputFileName)
         {
-            try
-            {
-                string text = FileService.LoadText(inputFileName);
-                string translated = _translator.TranslateText(text);
 
-                FileService.SaveText(outputFileName, translated);
-                
-                _history.Add(new TranslationRecord(client, text, translated));
-                
-            }
-            catch (TranslationException ex)
-            {
-                OnError?.Invoke(ex.Message);
-            }
+            string text = FileService.LoadText(inputFileName);
+            string translated = _translator.TranslateText(text);
+
+            FileService.SaveText(outputFileName, translated);
+            
+            _history.Add(new TranslationRecord(client, text, translated));
+            
+
         }
         
         public List<TranslationRecord> GetHistory()

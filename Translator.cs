@@ -4,6 +4,8 @@ namespace SlownikProjekt
     {
         private DictionaryTranslator _dictionary;
 
+        public event EventHandler<TranslationException>? TranslationError;
+
         public Translator(DictionaryTranslator dictionary)
         {
             _dictionary = dictionary;
@@ -16,8 +18,17 @@ namespace SlownikProjekt
 
             foreach (var w in words)
             {
-                var t = _dictionary.TranslateWordEnglishToPolish(w) ?? throw new TranslationException(w);
-                output.Add(t);
+                try
+                {
+                    var t = _dictionary.TranslateWordEnglishToPolish(w) ?? throw new TranslationException(w);
+                    output.Add(t);
+                }
+                catch (TranslationException ex)
+                {
+                    TranslationError?.Invoke(this, ex);
+
+                    output.Add($"[{w}]"); 
+                }
             }
 
             return string.Join(" ", output);
