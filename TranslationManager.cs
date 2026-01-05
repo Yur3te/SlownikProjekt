@@ -12,6 +12,7 @@ namespace SlownikProjekt
         {
             _translator = translator;
             _translator.TranslationError += OnTranslationError;
+            _history = HistoryStorage.Load();
         }
 
         private void OnTranslationError(object? sender, TranslationException e)
@@ -29,6 +30,7 @@ namespace SlownikProjekt
             FileService.SaveText(outputFileName, translated);
             
             _history.Add(new TranslationRecord(client, text, translated));
+            HistoryStorage.Save(_history);
             
 
         }

@@ -78,7 +78,6 @@ namespace SlownikProjekt
                         break;
                     
                     case "2":
-                    // to do translation manager co zwraca text
                         List<TranslationRecord> history = manager.GetHistory();
                         if (history.Count == 0)
                         {
@@ -89,7 +88,7 @@ namespace SlownikProjekt
                             Console.WriteLine("Historia tłumaczeń:");
                             foreach (var record in history)
                             {
-                                Console.WriteLine($"Klient: {record.Client.Name}, Oryginał: {record.OriginalText}, Tłumaczenie: {record.TranslatedText}");
+                                Console.WriteLine($"Klient: {record.ClientName}, Oryginał: {record.OriginalText}, Tłumaczenie: {record.TranslatedText}, Data: {record.Date}");
                             }
                         }
                         break;
