@@ -30,6 +30,7 @@ namespace SlownikProjekt
             {
                 Console.WriteLine("1 - Tłumacz tekst");
                 Console.WriteLine("2 - Pokaż historię tłumaczeń");
+                Console.WriteLine("3 - Pokaż statystyki klientów");
                 Console.WriteLine("0 - Wyjście");
                 Console.Write("Wybierz opcję: ");
                 string input = Console.ReadLine();
@@ -89,6 +90,21 @@ namespace SlownikProjekt
                             foreach (var record in history)
                             {
                                 Console.WriteLine($"Klient: {record.ClientName}, Oryginał: {record.OriginalText}, Tłumaczenie: {record.TranslatedText}, Data: {record.Date}");
+                            }
+                        }
+                        break;
+                    case "3":
+                        List<ClientStatistics> stats = manager.GetClientStatistics();
+                        if (stats.Count == 0)
+                        {
+                            Console.WriteLine("Brak statystyk klientów.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Statystyki klientów:");
+                            foreach (var stat in stats)
+                            {
+                                Console.WriteLine($"Klient: {stat.ClientName}, Liczba tłumaczeń: {stat.TranslationsCount}, Średnia długość tekstu: {stat.AverageTextLength}");
                             }
                         }
                         break;
