@@ -40,6 +40,18 @@ namespace SlownikProjekt
             return _history;
         }
 
+        public List<ClientStatistics> GetClientStatistics()
+        {
+            return _history
+                .GroupBy(record => record.ClientName)
+                .Select(group => new ClientStatistics
+                {
+                    ClientName = group.Key,
+                    TranslationsCount = group.Count(),
+                    AverageTextLength = group.Average(record => record.OriginalText.Length)
+                })
+                .ToList();
+        }
 
     }
 }
