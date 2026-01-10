@@ -11,7 +11,7 @@ namespace SlownikProjekt
             _dictionary = dictionary;
         }
 
-        public string TranslateText(string text)
+        public string TranslateText(string text, TranslationDirection direction)
         {
             var words = text.Split(' ');
             List<string> output = new();
@@ -20,8 +20,23 @@ namespace SlownikProjekt
             {
                 try
                 {
-                    var t = _dictionary.TranslateWordEnglishToPolish(w) ?? throw new TranslationException(w);
-                    output.Add(t);
+                    string? translated;
+
+                    if (direction == TranslationDirection.PolishToEnglish)
+                    {
+                        translated = _dictionary.TranslateWordPolishToEnglish(w);
+                    }
+                    else
+                    {
+                        translated = _dictionary.TranslateWordEnglishToPolish(w);
+                    }
+
+                    if (translated == null)
+                    {
+                        throw new TranslationException(w);
+                    }
+
+                    output.Add(translated);
                 }
                 catch (TranslationException ex)
                 {
