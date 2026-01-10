@@ -42,6 +42,32 @@ namespace SlownikProjekt
                         string clientName = Console.ReadLine();
                         Client client = new Client(clientName);
 
+                        TranslationDirection direction;
+
+                        while(true)
+                        {
+                            Console.WriteLine("Wybierz kierunek tłumaczenia:");
+                            Console.WriteLine("1 - Polski --> Angielski");
+                            Console.WriteLine("2 - Angielski --> Polski");
+
+                            string directionInput = Console.ReadLine();
+
+                            if (directionInput == "1")
+                            {
+                                direction = TranslationDirection.PolishToEnglish;
+                                break;
+                            }
+                            else if (directionInput == "2")
+                            {
+                                direction = TranslationDirection.EnglishToPolish;
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Niepoprawny wybór. Spróbuj ponownie.\n");
+                            }
+                        }
+
                         var files = FileService.GetPossibleFiles();
 
                         if (files.Count == 0)
@@ -75,7 +101,7 @@ namespace SlownikProjekt
                         Console.Write("Podaj nazwę pliku do zapisu tłumaczenia: ");
                         string outputFileName = Console.ReadLine();
 
-                        manager.TranslateForClient(client, inputFileName, outputFileName);
+                        manager.TranslateForClient(client, inputFileName, outputFileName, direction);
                         break;
                     
                     case "2":

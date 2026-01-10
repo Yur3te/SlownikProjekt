@@ -21,11 +21,11 @@ namespace SlownikProjekt
         }
 
 
-        public void TranslateForClient(Client client, string inputFileName, string outputFileName)
+        public void TranslateForClient(Client client, string inputFileName, string outputFileName, TranslationDirection direction)
         {
 
             string text = FileService.LoadText(inputFileName);
-            string translated = _translator.TranslateText(text);
+            string translated = _translator.TranslateText(text, direction);
 
             FileService.SaveText(outputFileName, translated);
             
