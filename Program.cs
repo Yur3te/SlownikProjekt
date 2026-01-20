@@ -11,6 +11,9 @@
 // klasa tłumaczienie, tekst oryginalne, przetłumaczony i data do historii
 // druga lista słów w słowniku pol ang - ang pol
 
+// TODO: wykres ile tłumaczeń w miesiącu
+
+
 using System;
 
 namespace SlownikProjekt
@@ -31,6 +34,7 @@ namespace SlownikProjekt
                 Console.WriteLine("1 - Tłumacz tekst");
                 Console.WriteLine("2 - Pokaż historię tłumaczeń");
                 Console.WriteLine("3 - Pokaż statystyki klientów");
+                Console.WriteLine("4 - Wygeneruj wykres tłumaczeń w miesiącu");
                 Console.WriteLine("0 - Wyjście");
                 Console.Write("Wybierz opcję: ");
                 string input = Console.ReadLine();
@@ -132,6 +136,19 @@ namespace SlownikProjekt
                             {
                                 Console.WriteLine($"Klient: {stat.ClientName}, Liczba tłumaczeń: {stat.TranslationsCount}, Średnia długość tekstu: {stat.AverageTextLength}");
                             }
+                        }
+                        break;
+                    case "4":
+                        var monthlyStats = manager.GetMonthlyStatistics();
+                        if (monthlyStats.Count == 0)
+                        {
+                            Console.WriteLine("Brak danych do wygenerowania wykresu.");
+                        }
+                        else
+                        {
+                            string chartPath = "translations_per_month.png";
+                            ChartGenerator.GenerateMonthlyTranslationsChart(monthlyStats, chartPath);
+                            Console.WriteLine($"Wykres zapisany do pliku: {chartPath}");
                         }
                         break;
                     case "0":

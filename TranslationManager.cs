@@ -53,5 +53,20 @@ namespace SlownikProjekt
                 .ToList();
         }
 
+        public List<MonthlyTranslationStats> GetMonthlyStatistics()
+        {
+            return _history
+                .GroupBy(r => new { r.Date.Year, r.Date.Month })
+                .Select(g => new MonthlyTranslationStats
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    Count = g.Count()
+                })
+                .OrderBy(x => x.Year)
+                .ThenBy(x => x.Month)
+                .ToList();
+        }
+
     }
 }
