@@ -1,17 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-// Projekt 6. 
-// Program automatycznie tłumaczący teksty z polskiego na angielski
-// funkcjonalność: program ma rozumieć tylko 8 (słownik) słów i tłumaczyć słowa 1:1, bez żadnej gramatyki, Zakładamy, że tylko te 8 słów wystąpi w tłumaczonym tekście. Zlecenia przychodzą od klientów.
-// 1. Zaprojektować odpowiednią strukturę klas - zastanowić się jakie klasy i jakie relacje między nimi będą potrzebne 
-//   (słowo, słownik, tekst, klient, inne ???)
-// 2. Zaimplementować w odpowiednich klasach metody umożliwiające tłumaczenie tekstów i wyszukiwanie informacji o już przetłumaczonych tekstach przy pomocy zapytań LINQ , w tym ile przetłumaczono tekstów zleconych przez każdego klienta oraz jaka była średnia długość tekstów zlecanych przez każdego z klientów.
-// 3. Odczytujemy teksty do tłumaczenia z plików tekstowych i do plików tekstowych zapisujemy przetłumaczone teksty.
-// 4. Za pomocą eventów wykonać powiadamianie klasy nadrzędnej o błędzie, jeśli w tekście będzie słowo spoza słownika.
-
-// klasa tłumaczienie, tekst oryginalne, przetłumaczony i data do historii
-// druga lista słów w słowniku pol ang - ang pol
-
-using System;
+﻿using System;
 
 namespace SlownikProjekt
 {
@@ -31,6 +18,7 @@ namespace SlownikProjekt
                 Console.WriteLine("1 - Tłumacz tekst");
                 Console.WriteLine("2 - Pokaż historię tłumaczeń");
                 Console.WriteLine("3 - Pokaż statystyki klientów");
+                Console.WriteLine("4 - Wygeneruj wykres tłumaczeń w miesiącu");
                 Console.WriteLine("0 - Wyjście");
                 Console.Write("Wybierz opcję: ");
                 string input = Console.ReadLine();
@@ -132,6 +120,19 @@ namespace SlownikProjekt
                             {
                                 Console.WriteLine($"Klient: {stat.ClientName}, Liczba tłumaczeń: {stat.TranslationsCount}, Średnia długość tekstu: {stat.AverageTextLength}");
                             }
+                        }
+                        break;
+                    case "4":
+                        var monthlyStats = manager.GetMonthlyStatistics();
+                        if (monthlyStats.Count == 0)
+                        {
+                            Console.WriteLine("Brak danych do wygenerowania wykresu.");
+                        }
+                        else
+                        {
+                            string chartPath = "translations_per_month.png";
+                            ChartGenerator.GenerateMonthlyTranslationsChart(monthlyStats, chartPath);
+                            Console.WriteLine($"Wykres zapisany do pliku: {chartPath}");
                         }
                         break;
                     case "0":
